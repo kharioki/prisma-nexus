@@ -9,6 +9,16 @@ type Company {
   symbol: String!
 }
 
+input CompanyCreateInput {
+  description: String!
+  name: String!
+  symbol: String!
+}
+
+type Mutation {
+  createOneCompany(data: CompanyCreateInput!): Company
+}
+
 type Query {
   companies: [Company!]!
   company(id: ID): Company

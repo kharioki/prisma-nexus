@@ -1,4 +1,13 @@
-import { makeSchema, queryType, objectType, idArg } from 'nexus';
+import {
+  makeSchema,
+  queryType,
+  objectType,
+  idArg,
+  mutationType,
+  inputObjectType,
+  arg,
+  nonNull,
+} from 'nexus';
 import path from 'path';
 
 const Company = objectType({
@@ -34,8 +43,36 @@ const Query = queryType({
   },
 });
 
+
+const CompanyCreateInput = inputObjectType({
+  name: "CompanyCreateInput",
+  definition(t) {
+    t.nonNull.string("name")
+    t.nonNull.string("symbol")
+    t.nonNull.string("description")
+  }
+});
+
+const Mutation = objectType({
+  name: "Mutation",
+  definition(t) {
+    t.field('createOneCompany', {
+      type: Company,
+      args: {
+        data: arg({ type: nonNull(CompanyCreateInput) }),
+      },
+      resolve: async (_root, { data }, context) => {
+        const company = await context.prisma.company.create({
+          data
+        })
+        return company
+      }
+    })
+  }
+});
+
 export const schema = makeSchema({
-  types: { Query, Company },
+  types: { Query, Company, Mutation },
   outputs: {
     schema: path.join(process.cwd(), 'schema.graphql'),
     typegen: path.join(process.cwd(), 'nexus.ts')

@@ -14,6 +14,11 @@ declare global {
 }
 
 export interface NexusGenInputs {
+  CompanyCreateInput: { // input type
+    description: string; // String!
+    name: string; // String!
+    symbol: string; // String!
+  }
 }
 
 export interface NexusGenEnums {
@@ -34,6 +39,7 @@ export interface NexusGenObjects {
     name: string; // String!
     symbol: string; // String!
   }
+  Mutation: {};
   Query: {};
 }
 
@@ -54,6 +60,9 @@ export interface NexusGenFieldTypes {
     name: string; // String!
     symbol: string; // String!
   }
+  Mutation: { // field return type
+    createOneCompany: NexusGenRootTypes['Company'] | null; // Company
+  }
   Query: { // field return type
     companies: NexusGenRootTypes['Company'][]; // [Company!]!
     company: NexusGenRootTypes['Company'] | null; // Company
@@ -67,6 +76,9 @@ export interface NexusGenFieldTypeNames {
     name: 'String'
     symbol: 'String'
   }
+  Mutation: { // field return type name
+    createOneCompany: 'Company'
+  }
   Query: { // field return type name
     companies: 'Company'
     company: 'Company'
@@ -74,6 +86,11 @@ export interface NexusGenFieldTypeNames {
 }
 
 export interface NexusGenArgTypes {
+  Mutation: {
+    createOneCompany: { // args
+      data: NexusGenInputs['CompanyCreateInput']; // CompanyCreateInput!
+    }
+  }
   Query: {
     company: { // args
       id?: string | null; // ID
@@ -89,7 +106,7 @@ export interface NexusGenTypeInterfaces {
 
 export type NexusGenObjectNames = keyof NexusGenObjects;
 
-export type NexusGenInputNames = never;
+export type NexusGenInputNames = keyof NexusGenInputs;
 
 export type NexusGenEnumNames = never;
 
