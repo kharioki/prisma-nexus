@@ -1,5 +1,14 @@
-// Next.js API route support: https://nextjs.org/docs/api-routes/introduction
+// define graphql server
 
-export default (req, res) => {
-  res.status(200).json({ name: 'John Doe' })
-}
+import { ApolloServer } from 'apollo-server-micro';
+
+const server = new ApolloServer({});
+const handler = server.createHandler({ path: '/api/graphql' });
+
+export const config = {
+  api: {
+    bodyParser: false,
+  },
+};
+
+export default handler;
