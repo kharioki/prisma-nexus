@@ -55,6 +55,7 @@ export interface NexusGenFieldTypes {
     symbol: string; // String!
   }
   Query: { // field return type
+    companies: NexusGenRootTypes['Company'][]; // [Company!]!
     company: NexusGenRootTypes['Company'] | null; // Company
   }
 }
@@ -67,6 +68,7 @@ export interface NexusGenFieldTypeNames {
     symbol: 'String'
   }
   Query: { // field return type name
+    companies: 'Company'
     company: 'Company'
   }
 }

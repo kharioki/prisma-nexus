@@ -23,6 +23,14 @@ const Query = queryType({
         return ctx.prisma.company.findUnique({ where: { id: Number(id) } })
       },
     });
+
+    t.nonNull.list.nonNull.field('companies', {
+      type: Company,
+      args: {},
+      resolve: async (_root, args, ctx) => {
+        return ctx.prisma.company.findMany()
+      },
+    });
   },
 });
 
