@@ -9,3 +9,11 @@ datasource db {
 generator client {
   provider = "prisma-client-js"
 }
+
+// define our models
+model Company {
+  id          Int    @id @default(autoincrement())
+  symbol      String
+  name        String
+  description String
+}
