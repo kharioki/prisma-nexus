@@ -15,7 +15,7 @@ const Query = queryType({
   definition(t) {
     t.field('company', {
       type: Company,
-      // nullable: true,
+      // nullable: true
       args: {
         id: idArg(),
       },
